@@ -75,9 +75,9 @@ export function ProfileForm() {
                 <CardTitle>{profile.name}</CardTitle>
                 <CardDescription>{getAge(profile.dob)}</CardDescription>
             </div>
-          <Button variant="outline" size="icon" onClick={() => setIsEditing(true)}>
-            <Edit className="h-4 w-4" />
-            <span className="sr-only">Edit Profile</span>
+          <Button variant="outline" onClick={() => setIsEditing(true)}>
+            <Edit className="mr-2 h-4 w-4" />
+            {t('profile_edit_button')}
           </Button>
         </CardHeader>
         <CardContent className="grid gap-4 md:grid-cols-2">

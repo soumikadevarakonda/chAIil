@@ -1,7 +1,7 @@
 export const translations = {
   en: {
     'app.name': 'chAIid',
-    'app.tagline': 'Your AI-powered parenting partner.',
+    'app.tagline': 'Your AI-Powered Parenting Partner.',
     'nav.dashboard': 'Dashboard',
     'nav.vaccines': 'Vaccines',
     'nav.nutrition': 'Nutrition',

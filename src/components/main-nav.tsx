@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Syringe, UtensilsCrossed, Hospital, Sparkles } from 'lucide-react';
+import { LayoutDashboard, Syringe, UtensilsCrossed, Hospital, Sparkles, Baby, Star } from 'lucide-react';
 import { useLanguage } from '@/contexts/language-context';
 import { cn } from '@/lib/utils';
 
@@ -16,6 +16,18 @@ export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElemen
       label: t('nav.dashboard'),
       icon: LayoutDashboard,
       active: pathname === '/dashboard',
+    },
+    {
+      href: '/profile',
+      label: t('nav.profile'),
+      icon: Baby,
+      active: pathname === '/profile',
+    },
+    {
+      href: '/milestones',
+      label: t('nav.milestones'),
+      icon: Star,
+      active: pathname === '/milestones',
     },
     {
       href: '/vaccines',

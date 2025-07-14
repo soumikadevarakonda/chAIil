@@ -29,3 +29,28 @@ export const vaccineSchedule: Vaccine[] = [
   { id: 'dpt_booster2', age: '5-6 Years', name: 'DPT Booster 2' },
   { id: 'tt', age: '10 Years & 16 Years', name: 'Tetanus and adult Diphtheria (Td)' },
 ];
+
+export type Milestone = {
+    id: string;
+    category: string;
+    title: string;
+}
+
+export const milestones = (t: (key: any) => string): Milestone[] => [
+    { id: 'social-smile', category: t('milestone_category_social'), title: t('milestone_social_smile') },
+    { id: 'cooing', category: t('milestone_category_social'), title: t('milestone_social_cooing') },
+    { id: 'recognizes-face', category: t('milestone_category_social'), title: t('milestone_social_recognizes_face') },
+    { id: 'laughs', category: t('milestone_category_social'), title: t('milestone_social_laughs') },
+    { id: 'rolls-over', category: t('milestone_category_motor'), title: t('milestone_motor_rolls_over') },
+    { id: 'sits-unsupported', category: t('milestone_category_motor'), title: t('milestone_motor_sits_unsupported') },
+    { id: 'crawls', category: t('milestone_category_motor'), title: t('milestone_motor_crawls') },
+    { id: 'pulls-to-stand', category: t('milestone_category_motor'), title: t('milestone_motor_pulls_to_stand') },
+    { id: 'walks', category: t('milestone_category_motor'), title: t('milestone_motor_walks') },
+    { id: 'babbling', category: t('milestone_category_language'), title: t('milestone_language_babbling') },
+    { id: 'first-word', category: t('milestone_category_language'), title: t('milestone_language_first_word') },
+    { id: 'responds-to-name', category: t('milestone_category_language'), title: t('milestone_language_responds_to_name') },
+    { id: 'waves-bye', category: t('milestone_category_language'), title: t('milestone_language_waves_bye') },
+    { id: 'solid-food', category: t('milestone_category_cognitive'), title: t('milestone_cognitive_solid_food') },
+    { id: 'pincer-grasp', category: t('milestone_category_cognitive'), title: t('milestone_cognitive_pincer_grasp') },
+    { id: 'finds-hidden-object', category: t('milestone_category_cognitive'), title: t('milestone_cognitive_finds_hidden_object') },
+]

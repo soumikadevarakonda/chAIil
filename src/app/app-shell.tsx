@@ -31,7 +31,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen">
-        <Sidebar className="hidden md:flex md:flex-col">
+        <Sidebar className="hidden md:flex md:flex-col fixed w-64 h-screen">
           <SidebarHeader>
             <Logo />
           </SidebarHeader>
@@ -49,7 +49,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           </SidebarContent>
         </SidebarInset>
 
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col md:pl-64">
           <header className="sticky top-0 z-10 flex items-center justify-between h-16 px-4 border-b bg-background md:px-6">
             <div className="flex items-center gap-4">
               <SidebarTrigger className="md:hidden" />

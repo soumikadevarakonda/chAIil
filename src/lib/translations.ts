@@ -162,6 +162,12 @@ export const translations = {
     'milestone_cognitive_solid_food': 'Starts eating solid foods',
     'milestone_cognitive_pincer_grasp': 'Develops pincer grasp (thumb and index finger)',
     'milestone_cognitive_finds_hidden_object': 'Finds a partially hidden object',
+    'reminders_title': 'Upcoming Reminders',
+    'reminders_subtitle': 'Your next important appointments for the next 60 days.',
+    'reminder_due_on': 'Due on',
+    'reminder_due_today': 'Today',
+    'reminder_due_tomorrow': 'Tomorrow',
+    'reminder_due_in_days': 'in {days} days',
   },
   hi: {
     'app.name': 'चाइल्ड',
@@ -326,6 +332,12 @@ export const translations = {
     'milestone_cognitive_solid_food': 'ठोस आहार खाना शुरू करता है',
     'milestone_cognitive_pincer_grasp': 'पिंसर पकड़ विकसित करता है (अंगूठा और तर्जनी)',
     'milestone_cognitive_finds_hidden_object': 'आंशिक रूप से छिपी हुई वस्तु को ढूंढता है',
+    'reminders_title': 'आगामी अनुस्मारक',
+    'reminders_subtitle': 'अगले 60 दिनों के लिए आपकी अगली महत्वपूर्ण नियुक्तियाँ।',
+    'reminder_due_on': 'देय तिथि',
+    'reminder_due_today': 'आज',
+    'reminder_due_tomorrow': 'कल',
+    'reminder_due_in_days': '{days} दिनों में',
   },
   te: {
     'app.name': 'చైల్డ్',
@@ -490,6 +502,12 @@ export const translations = {
     'milestone_cognitive_solid_food': 'ఘన ఆహారాలు తినడం ప్రారంభిస్తుంది',
     'milestone_cognitive_pincer_grasp': 'పిన్సర్ పట్టును అభివృద్ధి చేస్తుంది (బొటనవేలు మరియు చూపుడు వేలు)',
     'milestone_cognitive_finds_hidden_object': 'పాక్షికంగా దాచిన వస్తువును కనుగొంటుంది',
+    'reminders_title': 'రాబోయే రిమైండర్‌లు',
+    'reminders_subtitle': 'రాబోయే 60 రోజుల కోసం మీ తదుపరి ముఖ్యమైన అపాయింట్‌మెంట్‌లు.',
+    'reminder_due_on': 'గడువు తేదీ',
+    'reminder_due_today': 'ఈ రోజు',
+    'reminder_due_tomorrow': 'రేపు',
+    'reminder_due_in_days': '{days} రోజులలో',
   }
 };
 

@@ -30,6 +30,24 @@ export const vaccineSchedule: Vaccine[] = [
   { id: 'tt', age: '10 Years & 16 Years', name: 'Tetanus and adult Diphtheria (Td)' },
 ];
 
+export type Checkup = {
+    id: string;
+    age: string;
+    name: string;
+};
+
+export const checkupSchedule: Checkup[] = [
+    { id: 'checkup_1m', age: '1 Month', name: '1-Month Check-up' },
+    { id: 'checkup_2m', age: '2 Months', name: '2-Month Check-up' },
+    { id: 'checkup_4m', age: '4 Months', name: '4-Month Check-up' },
+    { id: 'checkup_6m', age: '6 Months', name: '6-Month Check-up' },
+    { id: 'checkup_9m', age: '9 Months', name: '9-Month Check-up' },
+    { id: 'checkup_12m', age: '12 Months', name: '1-Year Check-up' },
+    { id: 'checkup_15m', age: '15 Months', name: '15-Month Check-up' },
+    { id: 'checkup_18m', age: '18 Months', name: '18-Month Check-up' },
+    { id: 'checkup_24m', age: '24 Months', name: '2-Year Check-up' },
+];
+
 export type Milestone = {
     id: string;
     category: string;

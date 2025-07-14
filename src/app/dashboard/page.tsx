@@ -2,9 +2,10 @@
 'use client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Syringe, UtensilsCrossed, Lightbulb, Hospital, Baby, Star } from "lucide-react";
+import { Syringe, UtensilsCrossed, Lightbulb, Hospital, Baby, Star, Bell } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/language-context";
+import { Reminders } from "@/components/tracking/reminders";
 
 export default function DashboardPage() {
   const { t } = useLanguage();
@@ -15,6 +16,8 @@ export default function DashboardPage() {
         <h1 className="text-3xl font-bold tracking-tight font-headline">{t('dashboard_welcome_title')}</h1>
         <p className="text-muted-foreground">{t('dashboard_welcome_subtitle')}</p>
       </div>
+      
+      <Reminders />
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <Card className="hover:shadow-lg transition-shadow duration-300">

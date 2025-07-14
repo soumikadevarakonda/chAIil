@@ -11,9 +11,21 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Logo } from '@/components/logo';
 import { MainNav } from '@/components/main-nav';
 import { MobileNav } from '@/components/mobile-nav';
+import { Button } from '@/components/ui/button';
+import { LogOut } from 'lucide-react';
+import { useLanguage } from '@/contexts/language-context';
+import { useRouter } from 'next/navigation';
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const isMobile = useIsMobile();
+  const { t } = useLanguage();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // In a real app, you would clear the user session here.
+    router.push('/');
+  };
+
 
   return (
     <SidebarProvider>
@@ -44,7 +56,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 <h1 className="text-lg font-semibold">chAIid</h1>
               </div>
             </div>
-            {/* LanguageSwitcher removed from here */}
+            <Button variant="ghost" size="icon" onClick={handleLogout} aria-label={t('auth_log_out_button')}>
+                <LogOut className="h-5 w-5" />
+            </Button>
           </header>
           <main className="flex-1 p-4 md:p-6 lg:p-8">
             {children}

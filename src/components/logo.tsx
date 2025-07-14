@@ -8,9 +8,9 @@ export function Logo({ showTagline = false }: { showTagline?: boolean }) {
       <div className="bg-primary text-primary-foreground p-2 rounded-lg">
         <Baby className="h-6 w-6" />
       </div>
-      <div className="flex flex-col">
+      <div className="flex items-baseline gap-2">
         <span className="text-xl font-bold font-headline leading-tight">{t('app.name')}</span>
-        {showTagline && <p className="text-xs text-muted-foreground leading-tight">{t('app.tagline')}</p>}
+        {showTagline && <p className="text-sm text-muted-foreground leading-tight">- {t('app.tagline')}</p>}
       </div>
     </div>
   );

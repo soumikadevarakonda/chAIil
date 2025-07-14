@@ -32,7 +32,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       <div className="flex min-h-screen">
         <Sidebar className="hidden md:flex md:flex-col">
           <SidebarHeader>
-            <Logo showTagline />
+            <Logo />
           </SidebarHeader>
           <SidebarContent>
             <MainNav />
@@ -41,7 +41,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         
         <SidebarInset>
            <SidebarHeader>
-            <Logo showTagline />
+            <Logo />
           </SidebarHeader>
           <SidebarContent>
             <MainNav />

@@ -32,7 +32,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       <div className="flex min-h-screen">
         <Sidebar className="hidden md:flex md:flex-col">
           <SidebarHeader>
-            <Logo />
+            <Logo showTagline />
           </SidebarHeader>
           <SidebarContent>
             <MainNav />
@@ -41,7 +41,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         
         <SidebarInset>
            <SidebarHeader>
-            <Logo />
+            <Logo showTagline />
           </SidebarHeader>
           <SidebarContent>
             <MainNav />
@@ -53,7 +53,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             <div className="flex items-center gap-4">
               <SidebarTrigger className="md:hidden" />
               <div className="hidden md:block">
-                <h1 className="text-lg font-semibold">chAIid</h1>
+                <Logo showTagline />
+              </div>
+              <div className="md:hidden">
+                <Logo />
               </div>
             </div>
             <Button variant="ghost" size="icon" onClick={handleLogout} aria-label={t('auth_log_out_button')}>

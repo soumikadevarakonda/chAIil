@@ -1,6 +1,7 @@
 export const translations = {
   en: {
     'app.name': 'chAIid',
+    'app.tagline': 'Your AI-powered parenting partner.',
     'nav.dashboard': 'Dashboard',
     'nav.vaccines': 'Vaccines',
     'nav.nutrition': 'Nutrition',
@@ -175,6 +176,7 @@ export const translations = {
   },
   hi: {
     'app.name': 'चाइल्ड',
+    'app.tagline': 'आपका एआई-संचालित पालन-पोषण साथी।',
     'nav.dashboard': 'डैशबोर्ड',
     'nav.vaccines': 'टीके',
     'nav.nutrition': 'पोषण',
@@ -349,6 +351,7 @@ export const translations = {
   },
   te: {
     'app.name': 'చైల్డ్',
+    'app.tagline': 'మీ AI- ఆధారిత తల్లిదండ్రుల భాగస్వామి.',
     'nav.dashboard': 'డాష్‌బోర్డ్',
     'nav.vaccines': 'టీకాలు',
     'nav.nutrition': 'పోషణ',

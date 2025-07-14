@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useLanguage } from '@/contexts/language-context';
 import { List, MapPin, Phone, Search, Loader2 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 type Hospital = {
@@ -25,14 +25,13 @@ type Hospital = {
 export default function HospitalsPage() {
   const { t } = useLanguage();
   const { toast } = useToast();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('Vijayawada');
   const [hospitals, setHospitals] = useState<Hospital[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Set initial loading to true
   const [mapUrl, setMapUrl] = useState("https://placehold.co/600x800");
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!searchQuery) return;
+  const searchHospitals = async (query: string) => {
+    if (!query) return;
     
     setLoading(true);
     setHospitals([]);
@@ -40,7 +39,7 @@ export default function HospitalsPage() {
 
     try {
         // 1. Geocode the search query to get lat/lon
-        const geoResponse = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(searchQuery)}&format=json&limit=1`);
+        const geoResponse = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`);
         const geoData = await geoResponse.json();
 
         if (!geoData || geoData.length === 0) {
@@ -73,7 +72,7 @@ export default function HospitalsPage() {
 
         if (foundHospitals.length > 0) {
             const firstHospital = foundHospitals[0];
-            setMapUrl(`https://www.openstreetmap.org/export/embed.html?bbox=${firstHospital.lon-0.01}%2C${firstHospital.lat-0.01}%2C${firstHospital.lon+0.01}%2C${firstHospital.lat+0.01}&layer=mapnik&marker=${firstHospital.lat}%2C${firstHospital.lon}`);
+            setMapUrl(`https://www.openstreetmap.org/export/embed.html?bbox=${firstHospital.lon-0.05}%2C${firstHospital.lat-0.05}%2C${firstHospital.lon+0.05}%2C${firstHospital.lat+0.05}&layer=mapnik&marker=${firstHospital.lat}%2C${firstHospital.lon}`);
         } else {
              toast({
                 title: "No hospitals found",
@@ -91,6 +90,15 @@ export default function HospitalsPage() {
     } finally {
         setLoading(false);
     }
+  }
+
+  useEffect(() => {
+    searchHospitals('Vijayawada');
+  }, []); // Empty dependency array ensures this runs only once on mount
+
+  const handleSearchSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    searchHospitals(searchQuery);
   }
   
   const getAddress = (tags: Hospital['tags']) => {
@@ -112,7 +120,7 @@ export default function HospitalsPage() {
                     <CardDescription>{t('hospitals_search_placeholder')}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={handleSearch} className="flex w-full items-center space-x-2">
+                    <form onSubmit={handleSearchSubmit} className="flex w-full items-center space-x-2">
                         <div className="relative flex-grow">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                             <Input 
@@ -161,7 +169,7 @@ export default function HospitalsPage() {
                                 </div>
                             ))
                         ) : (
-                           <p className="text-center text-muted-foreground py-4">Search for a location to find hospitals.</p> 
+                           <p className="text-center text-muted-foreground py-4">No hospitals found for this location.</p> 
                         )}
                     </div>
                    )}

@@ -55,7 +55,7 @@ export function MilestoneTracker() {
   return (
     <Card>
       <CardContent className="pt-6">
-        <Accordion type="single" collapsible defaultValue="Social">
+        <Accordion type="single" collapsible defaultValue={Object.keys(groupedMilestones)[0]}>
             {Object.entries(groupedMilestones).map(([category, items]) => (
                 <AccordionItem value={category} key={category}>
                     <AccordionTrigger className="font-headline text-left">{category}</AccordionTrigger>

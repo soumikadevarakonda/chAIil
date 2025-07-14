@@ -1,6 +1,7 @@
 'use client';
 import { useLanguage } from '@/contexts/language-context';
 import { NutritionGuide } from '@/components/tracking/nutrition-guide';
+import DailyIntakeTracker from '@/components/tracking/daily-intake-tracker';
 
 export default function NutritionPage() {
   const { t } = useLanguage();
@@ -11,6 +12,7 @@ export default function NutritionPage() {
         <h1 className="text-3xl font-bold tracking-tight font-headline">{t('nutrition_title')}</h1>
         <p className="text-muted-foreground">{t('nutrition_subtitle')}</p>
       </div>
+      <DailyIntakeTracker />
       <NutritionGuide />
     </div>
   );

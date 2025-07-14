@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, ClipboardList, Sparkles } from 'lucide-react';
+import { LayoutDashboard, Syringe, UtensilsCrossed, Sparkles, Hospital } from 'lucide-react';
 import { useLanguage } from '@/contexts/language-context';
 import { cn } from '@/lib/utils';
 
@@ -18,10 +18,22 @@ export function MobileNav() {
       active: pathname === '/',
     },
     {
-      href: '/tracking',
-      label: t('nav.tracking'),
-      icon: ClipboardList,
-      active: pathname === '/tracking',
+      href: '/vaccines',
+      label: t('nav.vaccines'),
+      icon: Syringe,
+      active: pathname === '/vaccines',
+    },
+     {
+      href: '/nutrition',
+      label: t('nav.nutrition'),
+      icon: UtensilsCrossed,
+      active: pathname === '/nutrition',
+    },
+     {
+      href: '/hospitals',
+      label: t('nav.hospitals'),
+      icon: Hospital,
+      active: pathname === '/hospitals',
     },
     {
       href: '/guidance',
@@ -33,13 +45,13 @@ export function MobileNav() {
 
   return (
     <div className="fixed bottom-0 left-0 z-50 w-full h-16 border-t bg-background/95 backdrop-blur-sm md:hidden">
-      <div className="grid h-full max-w-lg grid-cols-3 mx-auto">
+      <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
         {routes.map((route) => (
           <Link
             key={route.href}
             href={route.href}
             className={cn(
-              'inline-flex flex-col items-center justify-center px-5 hover:bg-muted font-medium',
+              'inline-flex flex-col items-center justify-center px-2 hover:bg-muted font-medium text-center',
               route.active ? 'text-primary' : 'text-muted-foreground'
             )}
           >

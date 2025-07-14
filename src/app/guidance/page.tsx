@@ -9,6 +9,7 @@ import { useLanguage } from '@/contexts/language-context';
 import BabyCareForm from '@/components/guidance/baby-care-form';
 import FeedingAdviceForm from '@/components/guidance/feeding-advice-form';
 import SummarizeAdviceForm from '@/components/guidance/summarize-advice-form';
+import RashAnalysisForm from '@/components/guidance/rash-analysis-form';
 
 export default function GuidancePage() {
   const { t } = useLanguage();
@@ -20,7 +21,14 @@ export default function GuidancePage() {
         <p className="text-muted-foreground">{t('guidance_subtitle')}</p>
       </div>
 
-      <Accordion type="single" collapsible className="w-full" defaultValue="care">
+      <Accordion type="single" collapsible className="w-full" defaultValue="rash">
+        <AccordionItem value="rash">
+          <AccordionTrigger className="text-lg font-semibold font-headline text-left">{t('guidance_rash_title')}</AccordionTrigger>
+          <AccordionContent>
+            <p className="text-muted-foreground mb-4">{t('guidance_rash_description')}</p>
+            <RashAnalysisForm />
+          </AccordionContent>
+        </AccordionItem>
         <AccordionItem value="care">
           <AccordionTrigger className="text-lg font-semibold font-headline text-left">{t('guidance_care_title')}</AccordionTrigger>
           <AccordionContent>

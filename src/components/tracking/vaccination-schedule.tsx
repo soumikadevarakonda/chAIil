@@ -29,10 +29,7 @@ export function VaccinationSchedule() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>{t('tracking_vaccination_tab')}</CardTitle>
-      </CardHeader>
-      <CardContent>
+      <CardContent className="pt-6">
         <div className="space-y-6">
         {Object.entries(groupedVaccines).map(([age, vaccines]) => (
           <div key={age}>

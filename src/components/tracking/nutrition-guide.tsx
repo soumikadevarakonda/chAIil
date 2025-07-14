@@ -32,7 +32,7 @@ export function NutritionGuide() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{t('nutrition_title')}</CardTitle>
+        <CardTitle>{t('nutrition_guide_title')}</CardTitle>
       </CardHeader>
       <CardContent>
         <Accordion type="single" collapsible defaultValue="6-8">

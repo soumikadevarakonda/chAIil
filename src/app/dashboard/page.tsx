@@ -28,7 +28,7 @@ export default function DashboardPage() {
                 </Button>
             </div>
             <div className="h-full hidden md:block bg-secondary/50 relative">
-                <div className="absolute inset-0 h-full w-full">
+                 <div className="absolute inset-0 h-full w-full opacity-50">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="100%"
@@ -37,31 +37,28 @@ export default function DashboardPage() {
                     >
                       <defs>
                         <pattern
-                          id="pattern"
-                          width="40"
-                          height="40"
+                          id="pattern-hero"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
                           patternUnits="userSpaceOnUse"
-                          patternTransform="rotate(45)"
+                          patternContentUnits="userSpaceOnUse"
                         >
-                          <rect
-                            width="2"
-                            height="40"
-                            transform="translate(0,0)"
-                            fill="hsl(var(--primary) / 0.1)"
-                          ></rect>
-                          <rect
-                            width="2"
-                            height="40"
-                            transform="translate(20,0)"
-                            fill="hsl(var(--primary) / 0.1)"
-                          ></rect>
+                          <g fill="hsl(var(--primary) / 0.1)">
+                            {/* Pacifier */}
+                            <path d="M40 20 a 10 10 0 1 0 0.001 0 M40 30 a 5 5 0 1 0 0.001 0 M30 30 h-5 a 5 5 0 0 0 -5 5 v 5 h 20 v-5 a 5 5 0 0 0 -5 -5 h -5" />
+                            {/* Bottle */}
+                            <path d="M10 60 h 10 v -15 a 5 5 0 0 1 5 -5 h 0 a 5 5 0 0 1 5 5 v 15 h-20 v -5 h 5" transform="translate(50, -20) rotate(15) scale(0.8)" />
+                            {/* Teddy */}
+                            <path d="M60 60 a 5 5 0 1 0 0.001 0 M70 60 a 5 5 0 1 0 0.001 0 M65 70 a 10 10 0 1 0 0.001 0" transform="translate(-10, 0)" />
+                          </g>
                         </pattern>
                       </defs>
                       <rect
                         width="100%"
                         height="100%"
-                        fill="url(#pattern)"
-                        opacity="1"
+                        fill="url(#pattern-hero)"
                       ></rect>
                     </svg>
                   </div>

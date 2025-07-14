@@ -2,10 +2,11 @@
 'use client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Syringe, UtensilsCrossed, Lightbulb, Hospital, Baby, Star, Bell } from "lucide-react";
+import { Syringe, UtensilsCrossed, Lightbulb, Hospital, Baby, Star } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/language-context";
 import { Reminders } from "@/components/tracking/reminders";
+import Image from "next/image";
 
 export default function DashboardPage() {
   const { t } = useLanguage();
@@ -17,6 +18,28 @@ export default function DashboardPage() {
         <p className="text-muted-foreground">{t('dashboard_welcome_subtitle')}</p>
       </div>
       
+      <Card className="overflow-hidden">
+        <div className="grid md:grid-cols-2 items-center">
+            <div className="p-8 space-y-4">
+                <h2 className="text-2xl font-bold font-headline">{t('dashboard_hero_title')}</h2>
+                <p className="text-muted-foreground">{t('dashboard_hero_subtitle')}</p>
+                <Button asChild>
+                    <Link href="/milestones">{t('dashboard_milestones_button')}</Link>
+                </Button>
+            </div>
+            <div className="h-full hidden md:block">
+                 <Image
+                    src="https://placehold.co/600x400"
+                    data-ai-hint="baby playing toys"
+                    alt="Baby playing"
+                    width={600}
+                    height={400}
+                    className="w-full h-full object-cover"
+                />
+            </div>
+        </div>
+      </Card>
+
       <Reminders />
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

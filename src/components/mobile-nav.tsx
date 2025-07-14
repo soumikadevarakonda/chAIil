@@ -12,10 +12,10 @@ export function MobileNav() {
 
   const routes = [
     {
-      href: '/',
+      href: '/dashboard',
       label: t('nav.dashboard'),
       icon: LayoutDashboard,
-      active: pathname === '/',
+      active: pathname === '/dashboard',
     },
     {
       href: '/vaccines',

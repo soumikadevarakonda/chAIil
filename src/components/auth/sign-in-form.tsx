@@ -4,12 +4,14 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useLanguage } from '@/contexts/language-context';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { LanguageSwitcher } from '../language-switcher';
 
 const FormSchema = z.object({
   email: z.string().email('Please enter a valid email address.'),
@@ -21,6 +23,7 @@ type FormData = z.infer<typeof FormSchema>;
 export function SignInForm() {
   const { t } = useLanguage();
   const { toast } = useToast();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const form = useForm<FormData>({
@@ -41,6 +44,7 @@ export function SignInForm() {
         description: 'Welcome back!',
     })
     setLoading(false);
+    router.push('/dashboard');
   }
 
   return (
@@ -72,6 +76,9 @@ export function SignInForm() {
             </FormItem>
           )}
         />
+        <div className="flex items-center justify-between">
+            <LanguageSwitcher />
+        </div>
         <Button type="submit" disabled={loading} className="w-full">
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {t('auth_sign_in_button')}

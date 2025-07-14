@@ -1,19 +1,19 @@
-import type { Metadata } from 'next';
+// src/app/layout.tsx
+'use client'
 import './globals.css';
 import { LanguageProvider } from '@/contexts/language-context';
 import { Toaster } from '@/components/ui/toaster';
 import AppShell from './app-shell';
-
-export const metadata: Metadata = {
-  title: 'chAIid',
-  description: 'AI-powered baby care assistant for Indian parents.',
-};
+import { usePathname } from 'next/navigation';
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+  const isAuthPage = pathname === '/';
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -26,9 +26,13 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <LanguageProvider>
-          <AppShell>
-            {children}
-          </AppShell>
+            {isAuthPage ? (
+                children
+            ) : (
+                <AppShell>
+                    {children}
+                </AppShell>
+            )}
           <Toaster />
         </LanguageProvider>
       </body>

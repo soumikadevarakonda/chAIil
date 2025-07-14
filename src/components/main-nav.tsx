@@ -12,10 +12,10 @@ export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElemen
 
   const routes = [
     {
-      href: '/',
+      href: '/dashboard',
       label: t('nav.dashboard'),
       icon: LayoutDashboard,
-      active: pathname === '/',
+      active: pathname === '/dashboard',
     },
     {
       href: '/vaccines',

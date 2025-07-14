@@ -11,7 +11,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Logo } from '@/components/logo';
 import { MainNav } from '@/components/main-nav';
 import { MobileNav } from '@/components/mobile-nav';
-import { LanguageSwitcher } from '@/components/language-switcher';
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const isMobile = useIsMobile();
@@ -45,7 +44,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 <h1 className="text-lg font-semibold">chAIid</h1>
               </div>
             </div>
-            <LanguageSwitcher />
+            {/* LanguageSwitcher removed from here */}
           </header>
           <main className="flex-1 p-4 md:p-6 lg:p-8">
             {children}

@@ -15,7 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '../ui/calendar';
 import { cn } from '@/lib/utils';
-import { format } from 'date-fns';
+import { format, subMonths } from 'date-fns';
 
 const FormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -33,13 +33,16 @@ export function ProfileForm() {
   const { t } = useLanguage();
   const { toast } = useToast();
   const [profile, setProfile] = useLocalStorage<FormData>('chaiid-baby-profile', {
-    name: '',
-    dob: new Date(),
+    name: 'Aarav',
+    dob: subMonths(new Date(), 6), // Set default DOB to 6 months ago
+    weight: 7.5,
+    height: 68,
+    bloodType: 'O+',
   });
 
   const form = useForm<FormData>({
     resolver: zodResolver(FormSchema),
-    defaultValues: profile,
+    values: profile, // Use `values` to ensure the form is controlled and updates with localStorage changes
   });
 
   function onSubmit(data: FormData) {
@@ -85,7 +88,7 @@ export function ProfileForm() {
                           )}
                         >
                           {field.value ? (
-                            format(field.value, "PPP")
+                            format(new Date(field.value), "PPP")
                           ) : (
                             <span>{t('profile_dob_placeholder')}</span>
                           )}
@@ -96,7 +99,7 @@ export function ProfileForm() {
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
                         mode="single"
-                        selected={field.value}
+                        selected={new Date(field.value)}
                         onSelect={field.onChange}
                         disabled={(date) =>
                           date > new Date() || date < new Date("1900-01-01")
@@ -116,7 +119,7 @@ export function ProfileForm() {
                 <FormItem>
                   <FormLabel>{t('profile_weight_label')}</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder={t('profile_weight_placeholder')} {...field} />
+                    <Input type="number" placeholder={t('profile_weight_placeholder')} {...field} value={field.value ?? ''}/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -129,7 +132,7 @@ export function ProfileForm() {
                 <FormItem>
                   <FormLabel>{t('profile_height_label')}</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder={t('profile_height_placeholder')} {...field} />
+                    <Input type="number" placeholder={t('profile_height_placeholder')} {...field} value={field.value ?? ''}/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -142,7 +145,7 @@ export function ProfileForm() {
                 <FormItem>
                   <FormLabel>{t('profile_blood_type_label')}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t('profile_blood_type_placeholder')} {...field} />
+                    <Input placeholder={t('profile_blood_type_placeholder')} {...field} value={field.value ?? ''}/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -170,6 +170,7 @@ export const translations = {
     'reminder_due_today': 'Today',
     'reminder_due_tomorrow': 'Tomorrow',
     'reminder_due_in_days': 'in {days} days',
+    'audio_player_play_button': 'Play Audio Response',
   },
   hi: {
     'app.name': 'चाइल्ड',
@@ -342,6 +343,7 @@ export const translations = {
     'reminder_due_today': 'आज',
     'reminder_due_tomorrow': 'कल',
     'reminder_due_in_days': '{days} दिनों में',
+    'audio_player_play_button': 'ऑडियो प्रतिक्रिया चलाएं',
   },
   te: {
     'app.name': 'చైల్డ్',
@@ -514,6 +516,7 @@ export const translations = {
     'reminder_due_today': 'ఈ రోజు',
     'reminder_due_tomorrow': 'రేపు',
     'reminder_due_in_days': '{days} రోజులలో',
+    'audio_player_play_button': 'ఆడియో ప్రతిస్పందనను ప్లే చేయండి',
   }
 };
 

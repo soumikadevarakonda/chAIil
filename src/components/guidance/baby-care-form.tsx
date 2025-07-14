@@ -12,6 +12,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
+import { useVoiceInput } from '@/hooks/use-voice-input';
+import { VoiceInputButton } from '../voice-input-button';
+import { AudioPlayer } from '../audio-player';
+import { textToSpeech } from '@/ai/flows/text-to-speech';
 
 const FormSchema = z.object({
   query: z.string().min(10, 'Please describe your question in at least 10 characters.'),
@@ -25,6 +29,8 @@ export default function BabyCareForm() {
   const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
+  const [audioDataUri, setAudioDataUri] = useState<string | null>(null);
+  const [isTtsLoading, setIsTtsLoading] = useState(false);
 
   const form = useForm<FormData>({
     resolver: zodResolver(FormSchema),
@@ -35,9 +41,14 @@ export default function BabyCareForm() {
     },
   });
 
+  const { transcript, isListening, startListening, stopListening } = useVoiceInput({
+    onTranscript: (text) => form.setValue('query', form.getValues('query') + text),
+  });
+
   async function onSubmit(data: FormData) {
     setLoading(true);
     setResult(null);
+    setAudioDataUri(null);
     try {
       const response = await babyCareGuidance(data);
       setResult(response.advice);
@@ -48,6 +59,19 @@ export default function BabyCareForm() {
       setLoading(false);
     }
   }
+
+  const handleGetAudio = async () => {
+    if (!result) return;
+    setIsTtsLoading(true);
+    try {
+      const response = await textToSpeech(result);
+      setAudioDataUri(response.audioDataUri);
+    } catch (error) {
+      console.error('Error generating audio:', error);
+    } finally {
+      setIsTtsLoading(false);
+    }
+  };
 
   return (
     <Card>
@@ -61,7 +85,14 @@ export default function BabyCareForm() {
                 <FormItem>
                   <FormLabel>{t('form_query_label')}</FormLabel>
                   <FormControl>
-                    <Textarea placeholder={t('form_query_placeholder')} {...field} />
+                    <div className="relative">
+                      <Textarea placeholder={t('form_query_placeholder')} {...field} />
+                      <VoiceInputButton
+                        isListening={isListening}
+                        onStart={startListening}
+                        onStop={stopListening}
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -113,6 +144,13 @@ export default function BabyCareForm() {
             </CardHeader>
             <CardContent>
               <p className="whitespace-pre-wrap">{result}</p>
+              <div className="mt-4">
+                <AudioPlayer
+                  audioDataUri={audioDataUri}
+                  onGetAudio={handleGetAudio}
+                  isLoading={isTtsLoading}
+                />
+              </div>
             </CardContent>
           </Card>
         )}

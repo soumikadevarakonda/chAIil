@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { LogOut } from 'lucide-react';
 import { useLanguage } from '@/contexts/language-context';
 import { useRouter } from 'next/navigation';
+import { LanguageSwitcher } from '@/components/language-switcher';
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const isMobile = useIsMobile();
@@ -59,9 +60,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 <Logo />
               </div>
             </div>
-            <Button variant="ghost" size="icon" onClick={handleLogout} aria-label={t('auth_log_out_button')}>
-                <LogOut className="h-5 w-5" />
-            </Button>
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher className="w-auto" />
+              <Button variant="ghost" size="icon" onClick={handleLogout} aria-label={t('auth_log_out_button')}>
+                  <LogOut className="h-5 w-5" />
+              </Button>
+            </div>
           </header>
           <main className="flex-1 p-4 md:p-6 lg:p-8">
             {children}

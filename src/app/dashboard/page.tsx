@@ -27,15 +27,44 @@ export default function DashboardPage() {
                     <Link href="/milestones">{t('dashboard_milestones_button')}</Link>
                 </Button>
             </div>
-            <div className="h-full hidden md:block">
-                 <Image
-                    src="https://placehold.co/600x400"
-                    data-ai-hint="baby playing toys"
-                    alt="Baby playing"
-                    width={600}
-                    height={400}
-                    className="w-full h-full object-cover"
-                />
+            <div className="h-full hidden md:block bg-secondary/50 relative">
+                <div className="absolute inset-0 h-full w-full">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="100%"
+                      height="100%"
+                      className="h-full w-full"
+                    >
+                      <defs>
+                        <pattern
+                          id="pattern"
+                          width="40"
+                          height="40"
+                          patternUnits="userSpaceOnUse"
+                          patternTransform="rotate(45)"
+                        >
+                          <rect
+                            width="2"
+                            height="40"
+                            transform="translate(0,0)"
+                            fill="hsl(var(--primary) / 0.1)"
+                          ></rect>
+                          <rect
+                            width="2"
+                            height="40"
+                            transform="translate(20,0)"
+                            fill="hsl(var(--primary) / 0.1)"
+                          ></rect>
+                        </pattern>
+                      </defs>
+                      <rect
+                        width="100%"
+                        height="100%"
+                        fill="url(#pattern)"
+                        opacity="1"
+                      ></rect>
+                    </svg>
+                  </div>
             </div>
         </div>
       </Card>

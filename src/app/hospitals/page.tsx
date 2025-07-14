@@ -74,7 +74,9 @@ export default function HospitalsPage() {
 
         if (foundHospitals.length > 0) {
             const firstHospital = foundHospitals[0];
-            setMapUrl(`https://www.openstreetmap.org/export/embed.html?bbox=${firstHospital.lon-0.05}%2C${firstHospital.lat-0.05}%2C${firstHospital.lon+0.05}%2C${firstHospital.lat+0.05}&layer=mapnik&marker=${firstHospital.lat}%2C${firstHospital.lon}`);
+            const centerLat = hospitalData.elements.reduce((acc: number, h: any) => acc + (parseFloat(h.lat) || 0), 0) / foundHospitals.length;
+            const centerLon = hospitalData.elements.reduce((acc: number, h: any) => acc + (parseFloat(h.lon) || 0), 0) / foundHospitals.length;
+            setMapUrl(`https://www.openstreetmap.org/export/embed.html?bbox=${centerLon-0.1}%2C${centerLat-0.1}%2C${centerLon+0.1}%2C${centerLat+0.1}&layer=mapnik`);
         } else {
              toast({
                 title: "No hospitals found",
@@ -96,6 +98,7 @@ export default function HospitalsPage() {
 
   useEffect(() => {
     searchHospitals('Vijayawada');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this runs only once on mount
 
   const handleSearchSubmit = async (e: React.FormEvent) => {
@@ -114,7 +117,7 @@ export default function HospitalsPage() {
         <p className="text-muted-foreground">{t('hospitals_subtitle')}</p>
       </div>
       
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
         <div className="flex flex-col gap-8">
             <Card>
                 <CardHeader>
@@ -178,28 +181,30 @@ export default function HospitalsPage() {
                 </CardContent>
             </Card>
         </div>
-
-        <Card className="overflow-hidden lg:sticky lg:top-24 h-[500px] lg:h-auto">
-             {mapUrl.startsWith('https') && mapUrl.includes('openstreetmap.org') ? (
-                 <iframe
-                    width="100%"
-                    height="100%"
-                    className="border-0"
-                    loading="lazy"
-                    allowFullScreen
-                    src={mapUrl}
-                ></iframe>
-             ) : (
-                <Image
-                    src={mapUrl}
-                    data-ai-hint="map city"
-                    alt="Map of hospitals"
-                    width={600}
-                    height={800}
-                    className="w-full h-full object-cover"
-                />
-             )}
-        </Card>
+        
+        <div className="lg:sticky lg:top-24">
+            <Card className="overflow-hidden h-[400px] lg:h-[calc(100vh-8rem)]">
+                {mapUrl.startsWith('https') && mapUrl.includes('openstreetmap.org') ? (
+                    <iframe
+                        width="100%"
+                        height="100%"
+                        className="border-0"
+                        loading="lazy"
+                        allowFullScreen
+                        src={mapUrl}
+                    ></iframe>
+                ) : (
+                    <Image
+                        src={mapUrl}
+                        data-ai-hint="map city"
+                        alt="Map of hospitals"
+                        width={600}
+                        height={800}
+                        className="w-full h-full object-cover"
+                    />
+                )}
+            </Card>
+        </div>
       </div>
     </div>
   );

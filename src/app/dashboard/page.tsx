@@ -79,7 +79,7 @@ export default function DashboardPage() {
             </Button>
           </CardContent>
         </Card>
-        <Card className="bg-secondary hover:shadow-lg transition-shadow duration-300">
+        <Card className="bg-secondary hover:shadow-lg transition-shadow duration-300 lg:col-span-3 xl:col-span-4">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t('dashboard_tip_title')}</CardTitle>
             <Lightbulb className="h-4 w-4 text-muted-foreground" />

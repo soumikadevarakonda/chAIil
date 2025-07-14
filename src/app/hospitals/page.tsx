@@ -26,6 +26,7 @@ export default function HospitalsPage() {
   const { t } = useLanguage();
   const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState('Vijayawada');
+  const [displayQuery, setDisplayQuery] = useState('Vijayawada');
   const [hospitals, setHospitals] = useState<Hospital[]>([]);
   const [loading, setLoading] = useState(true); // Set initial loading to true
   const [mapUrl, setMapUrl] = useState("https://placehold.co/600x800");
@@ -34,6 +35,7 @@ export default function HospitalsPage() {
     if (!query) return;
     
     setLoading(true);
+    setDisplayQuery(query);
     setHospitals([]);
     setMapUrl("https://placehold.co/600x800");
 
@@ -141,7 +143,7 @@ export default function HospitalsPage() {
 
             <Card>
                 <CardHeader>
-                    <CardTitle>{t('hospitals_sample_title')}</CardTitle>
+                    <CardTitle>{t('hospitals_sample_title')} {displayQuery}</CardTitle>
                 </CardHeader>
                 <CardContent>
                    {loading ? (

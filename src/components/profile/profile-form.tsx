@@ -1,5 +1,6 @@
 // src/components/profile/profile-form.tsx
 'use client';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -9,13 +10,13 @@ import useLocalStorage from '@/hooks/use-local-storage';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { CalendarIcon } from 'lucide-react';
+import { CalendarIcon, Edit, FileText } from 'lucide-react';
 import { Calendar } from '../ui/calendar';
 import { cn } from '@/lib/utils';
-import { format, subMonths } from 'date-fns';
+import { format, subMonths, differenceInMonths, differenceInYears } from 'date-fns';
 
 const FormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -32,6 +33,7 @@ type FormData = z.infer<typeof FormSchema>;
 export function ProfileForm() {
   const { t } = useLanguage();
   const { toast } = useToast();
+  const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useLocalStorage<FormData>('chaiid-baby-profile', {
     name: 'Aarav',
     dob: subMonths(new Date(), 6), // Set default DOB to 6 months ago
@@ -47,15 +49,86 @@ export function ProfileForm() {
 
   function onSubmit(data: FormData) {
     setProfile(data);
+    setIsEditing(false);
     toast({
       title: t('profile_saved_title'),
       description: t('profile_saved_description'),
     });
   }
 
+  const getAge = (dob: Date) => {
+    const today = new Date();
+    const birthDate = new Date(dob);
+    const years = differenceInYears(today, birthDate);
+    const months = differenceInMonths(today, birthDate) % 12;
+    if (years > 0) {
+      return `${years} year${years > 1 ? 's' : ''}, ${months} month${months > 1 ? 's' : ''} old`;
+    }
+    return `${months} month${months !== 1 ? 's' : ''} old`;
+  }
+
+  if (!isEditing) {
+    return (
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+                <CardTitle>{profile.name}</CardTitle>
+                <CardDescription>{getAge(profile.dob)}</CardDescription>
+            </div>
+          <Button variant="outline" size="icon" onClick={() => setIsEditing(true)}>
+            <Edit className="h-4 w-4" />
+            <span className="sr-only">Edit Profile</span>
+          </Button>
+        </CardHeader>
+        <CardContent className="grid gap-4 md:grid-cols-2">
+            <div className="flex items-start gap-4 rounded-lg border p-4">
+                <div className="bg-secondary p-3 rounded-md mt-1">
+                    <FileText className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                    <h3 className="font-semibold">{t('profile_weight_label')}</h3>
+                    <p className="text-muted-foreground">{profile.weight ? `${profile.weight} kg` : 'N/A'}</p>
+                </div>
+            </div>
+            <div className="flex items-start gap-4 rounded-lg border p-4">
+                <div className="bg-secondary p-3 rounded-md mt-1">
+                    <FileText className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                    <h3 className="font-semibold">{t('profile_height_label')}</h3>
+                    <p className="text-muted-foreground">{profile.height ? `${profile.height} cm` : 'N/A'}</p>
+                </div>
+            </div>
+            <div className="flex items-start gap-4 rounded-lg border p-4">
+                <div className="bg-secondary p-3 rounded-md mt-1">
+                    <FileText className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                    <h3 className="font-semibold">{t('profile_dob_label')}</h3>
+                    <p className="text-muted-foreground">{format(new Date(profile.dob), "PPP")}</p>
+                </div>
+            </div>
+            <div className="flex items-start gap-4 rounded-lg border p-4">
+                <div className="bg-secondary p-3 rounded-md mt-1">
+                    <FileText className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                    <h3 className="font-semibold">{t('profile_blood_type_label')}</h3>
+                    <p className="text-muted-foreground">{profile.bloodType || 'N/A'}</p>
+                </div>
+            </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card>
-      <CardContent className="pt-6">
+      <CardHeader>
+        <CardTitle>{t('profile_title')}</CardTitle>
+        <CardDescription>{t('profile_subtitle')}</CardDescription>
+      </CardHeader>
+      <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
@@ -119,7 +192,7 @@ export function ProfileForm() {
                 <FormItem>
                   <FormLabel>{t('profile_weight_label')}</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder={t('profile_weight_placeholder')} {...field} value={field.value ?? ''}/>
+                    <Input type="number" step="0.1" placeholder={t('profile_weight_placeholder')} {...field} value={field.value ?? ''}/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -132,7 +205,7 @@ export function ProfileForm() {
                 <FormItem>
                   <FormLabel>{t('profile_height_label')}</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder={t('profile_height_placeholder')} {...field} value={field.value ?? ''}/>
+                    <Input type="number" step="0.1" placeholder={t('profile_height_placeholder')} {...field} value={field.value ?? ''}/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -151,7 +224,10 @@ export function ProfileForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit">{t('profile_save_button')}</Button>
+            <div className="flex gap-2">
+                <Button type="submit">{t('profile_save_button')}</Button>
+                <Button variant="outline" type="button" onClick={() => setIsEditing(false)}>Cancel</Button>
+            </div>
           </form>
         </Form>
       </CardContent>

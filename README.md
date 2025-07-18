@@ -1,5 +1,7 @@
 # 👶 chAIid – AI-Powered Baby Care for Indian Parents 🇮🇳
 
+🚀 **[Live Demo → Try chAIid Now](https://chaiid-ai.vercel.app/)**
+
 **chAIid** (pronounced *child*) is a smart, multilingual, and mobile-first AI application designed to support Indian parents — especially **low-income and novice internet users** — through the **critical first 1000 days** of their baby's development.
 
 With a focus on **personalization, accessibility, and cultural relevance**, chAIid provides **AI-guided medical support**, milestone tracking, nutrition plans, hospital locators, and more — powered by **LLMs, VLMs, React, TailwindCSS, and Firebase**.
